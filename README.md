@@ -1,6 +1,6 @@
-# Interaction
+# Interactive
 
-Grace's text conversation engine. Interaction assembles the system prompt and
+Grace's text conversation engine. Interactive assembles the system prompt and
 recent history, calls an OpenAI-compatible chat endpoint, streams response
 events, and persists completed exchanges through the supplied Memory API.
 
@@ -8,11 +8,11 @@ events, and persists completed exchanges through the supplied Memory API.
 
 - **Shell** owns process lifecycle, system configuration, and runtime wiring.
 - **Telepathy** owns the user-facing console and input/output transport.
-- **Interaction** owns text-turn processing and chat-model requests.
+- **Interactive** owns text-turn processing and chat-model requests.
 - **Memory** owns conversation and memory storage APIs.
 
 The package is independent of ROS. Shell's ROS adapter supplies configuration,
-Memory, a logger, and an event publisher. Interaction does not own database
+Memory, a logger, and an event publisher. Interactive does not own database
 schemas, user-interface transports, model hosting, tool execution, Canvas, or
 image generation.
 
@@ -37,11 +37,13 @@ neighboring checkout using `pip install -r requirements.txt`:
 
 ```sh
 cd ~/AGi/AIVA
-git clone https://github.com/AGi-robot/interaction.git interaction
+git clone https://github.com/AGi-robot/interactive.git interactive
 .venv/bin/python -m pip install -r requirements.txt
 ```
 
 ## License and origin
+
+The Python distribution is `agi-interactive`, imported as `agi_interactive`.
 
 This repository is AGPL-3.0-only. The conversation-turn implementation was
 extracted and adapted from the text-chat path in

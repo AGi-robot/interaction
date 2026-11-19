@@ -3,7 +3,7 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "agi-interaction"
+name = "agi-interactive"
 version = "0.1.0"
 description = "Grace's transport-independent conversation turn engine"
 readme = "README.md"

@@ -55,7 +55,7 @@ class ConversationEngine:
         self.timezone_name = timezone_name
         self.timeout = timeout
         self.stream = stream or httpx.stream
-        self.logger = logger or logging.getLogger("agi_interaction")
+        self.logger = logger or logging.getLogger("agi_interactive")
 
     def answer(self, text: str, identifier: str = "") -> None:
         """Process one user turn and publish streamed response events."""

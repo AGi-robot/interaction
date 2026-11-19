@@ -92,6 +92,7 @@ class ConversationEngine:
             headers = {"Authorization": f"Bearer {self.api_key}"} if self.api_key else {}
             self.publish({"type": "start", "content": "", "radio_id": identifier})
             answer_parts: list[str] = []
+            stream_finished = False
             usage: dict[str, Any] = {}
             timings: dict[str, Any] = {}
             with self.stream(
@@ -113,6 +114,7 @@ class ConversationEngine:
                         continue
                     payload = line[5:].strip()
                     if payload == "[DONE]":
+                        stream_finished = True
                         break
                     try:
                         event = json.loads(payload)
@@ -125,11 +127,15 @@ class ConversationEngine:
                     choices = event.get("choices") or []
                     if not choices:
                         continue
+                    if choices[0].get("finish_reason") is not None:
+                        stream_finished = True
                     chunk = choices[0].get("delta", {}).get("content", "")
                     if isinstance(chunk, str) and chunk:
                         answer_parts.append(chunk)
                         self.publish({"type": "delta", "content": chunk, "radio_id": identifier})
 
+            if not stream_finished:
+                raise ValueError("LLM stream ended before a completion marker")
             answer = "".join(answer_parts).strip()
             if not answer:
                 raise ValueError("LLM returned an empty response")

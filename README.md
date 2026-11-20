@@ -36,7 +36,7 @@ For the AGi local workspace layout, Shell installs this package from the
 neighboring checkout using `pip install -r requirements.txt`:
 
 ```sh
-cd ~/AGi/AIVA
+cd AIVA
 git clone https://github.com/AGi-robot/interactive.git interactive
 .venv/bin/python -m pip install -r requirements.txt
 ```
